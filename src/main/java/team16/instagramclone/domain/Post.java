@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 public class Post extends TimeStamped {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long postId;
 
