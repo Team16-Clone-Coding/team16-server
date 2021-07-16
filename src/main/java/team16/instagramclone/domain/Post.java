@@ -23,9 +23,6 @@ public class Post {
     @Column(nullable = false)
     private int postLikes;
 
-    @OneToOne
-    private User user;
-
     @OneToMany
     private List<Comment> commentList;
 
