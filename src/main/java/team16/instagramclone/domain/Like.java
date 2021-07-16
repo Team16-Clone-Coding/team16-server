@@ -13,9 +13,16 @@ public class Like {
     @Id
     private Long likeId;
 
+    @Column(nullable = false)
+    private int howManyLike;
+
     @OneToOne
     private Post post;
 
     @OneToMany
     private List<User> userList;
+
+    public void updateHowManyLike(int plusOrMinus) {
+        howManyLike += plusOrMinus;
+    }
 }
