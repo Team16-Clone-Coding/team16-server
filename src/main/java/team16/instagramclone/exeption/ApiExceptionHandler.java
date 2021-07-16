@@ -11,7 +11,7 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value = { ApiRequestException.class})
     public ResponseEntity<Object> handleApiRequestException(ApiRequestException ex) {
-        com.sparta.mungmung.exception.ApiException apiException = new com.sparta.mungmung.exception.ApiException(
+        ApiException apiException = new ApiException(
                 ex.getMessage(),
                 // HTTP 400 -> Client Error
                 HttpStatus.BAD_REQUEST
@@ -26,7 +26,7 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value = { BadCredentialsException.class})
     public ResponseEntity<Object> handleBadCredentialsException(BadCredentialsException ex) {
-        com.sparta.mungmung.exception.ApiException apiException = new com.sparta.mungmung.exception.ApiException(
+        ApiException apiException = new ApiException(
 
                 // HTTP 400 -> Client Error
                 ex.getMessage(),
