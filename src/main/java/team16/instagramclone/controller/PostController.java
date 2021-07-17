@@ -7,6 +7,7 @@ import team16.instagramclone.domain.Post;
 import team16.instagramclone.dto.PostRequestDto;
 import team16.instagramclone.repository.PostRepository;
 import team16.instagramclone.security.UserDetailsImpl;
+import team16.instagramclone.service.LikeService;
 import team16.instagramclone.service.PostService;
 
 import java.util.List;
