@@ -18,4 +18,7 @@ public class Comment extends TimeStamped {
 
     @Column(nullable = false)
     private String commentAuthor;
+
+    @Column(nullable = false)
+    private Long postId;
 }
