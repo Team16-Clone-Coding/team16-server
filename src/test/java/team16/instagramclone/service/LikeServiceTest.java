@@ -1,13 +1,5 @@
 package team16.instagramclone.service;
 
-import org.junit.jupiter.api.Test;
-import team16.instagramclone.domain.Like;
-import team16.instagramclone.domain.User;
-import team16.instagramclone.repository.LikeRepository;
-import team16.instagramclone.security.UserDetailsImpl;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class LikeServiceTest {
 
 

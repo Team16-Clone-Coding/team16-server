@@ -4,32 +4,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Like {
+public class Likes {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long likeId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int howManyLike;
 
     @OneToOne
     private Post post;
 
-    @OneToMany
+    @ManyToMany
     private List<User> userList;
 
     public void updateHowManyLike(int plusOrMinus) {
         howManyLike += plusOrMinus;
     }
 
-    public Like(Post post, User user) {
+    public Likes(Post post, User user) {
         this.post = post;
+//        userList = new ArrayList<User>();
+//        userList.add(user);
         this.userList.add(user);
     }
 }
