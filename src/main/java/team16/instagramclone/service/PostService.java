@@ -16,6 +16,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final LikeService likeService;
 
     //게시글 조회
     public List<Post> getPostList(){
@@ -26,6 +27,7 @@ public class PostService {
     public void createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails){
         User user = userDetails.getUser();
         Post post = new Post(postRequestDto, user);
+        likeService.createLike(post, user);
     }
 
 }
