@@ -7,6 +7,7 @@ import team16.instagramclone.domain.Post;
 import team16.instagramclone.dto.PostRequestDto;
 import team16.instagramclone.repository.PostRepository;
 import team16.instagramclone.security.UserDetailsImpl;
+import team16.instagramclone.service.LikeService;
 import team16.instagramclone.service.PostService;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class PostController {
     // 게시글 작성
     @PostMapping("/posts")
     public void createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        postService.createPost(postRequestDto, userDetails);
+//        postService.createPost(postRequestDto, userDetails);
+        postService.createPost(postRequestDto);
     }
 }

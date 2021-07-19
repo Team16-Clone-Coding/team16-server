@@ -14,8 +14,10 @@ public class LikeController {
 
     private final LikeService likeService;
 
-    @PostMapping("/posts/{id}/comment")
-    public void doLike(@PathVariable(name = "postId") Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        likeService.doLike(postId, userDetails);
+    //좋아요 기능
+    @PostMapping("/posts/{id}/like")
+    public void doLike(@PathVariable(name = "id") Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+//        likeService.doLike(postId, userDetails);
+        likeService.doLike(postId);
     }
 }
