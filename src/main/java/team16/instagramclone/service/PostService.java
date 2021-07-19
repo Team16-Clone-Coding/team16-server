@@ -26,8 +26,9 @@ public class PostService {
     }
 
     //게시글 작성
-    public void createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails){
-        User user = userDetails.getUser();
+    public void createPost(PostRequestDto postRequestDto){
+//        User user = userDetails.getUser();
+        User user = userRepository.findById(1L).get();
         Post post = new Post(postRequestDto, user);
         postRepository.save(post);
         likeService.createLike(post);
