@@ -16,6 +16,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    //댓글 작성
     @PostMapping("posts/{id}/comment")
     public void createComment(@PathVariable(name = "id") Long postId,@RequestBody String commentContent, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.saveComment(commentContent, postId, userDetails);
