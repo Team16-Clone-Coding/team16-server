@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long userId;
 
