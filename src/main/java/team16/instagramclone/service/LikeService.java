@@ -6,6 +6,7 @@ import team16.instagramclone.domain.Likes;
 import team16.instagramclone.domain.Post;
 import team16.instagramclone.domain.User;
 import team16.instagramclone.repository.LikeRepository;
+import team16.instagramclone.repository.UserRepository;
 import team16.instagramclone.security.UserDetailsImpl;
 
 import javax.transaction.Transactional;
@@ -15,22 +16,26 @@ import javax.transaction.Transactional;
 public class LikeService {
 
     private final LikeRepository likeRepository;
+    public final UserRepository userRepository;
 
     //좋아요 생성
-    public void createLike(Post post, User user) {
-        Likes likes = new Likes(post, user);
+    public void createLike(Post post) {
+        Likes likes = new Likes(post);
+        likeRepository.save(likes);
     }
 
     //좋아요 증감
     @Transactional
     public void doLike(Long postId, UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
-        if (likeRepository.findAllByPost_PostIdAndUserListContaining(postId, user).isPresent()) {
+        if (likeRepository.findByPost_PostIdAndUserList(postId, user).isPresent()) {
             Likes likes = likeRepository.findByPost_PostId(postId).get();
             likes.updateHowManyLike(-1);
+            likes.getUserList().remove(user);
         } else {
             Likes likes = likeRepository.findByPost_PostId(postId).get();
             likes.updateHowManyLike(+1);
+            likes.updateUser(user);
         }
     }
 }

@@ -29,10 +29,12 @@ public class Likes {
         howManyLike += plusOrMinus;
     }
 
-    public Likes(Post post, User user) {
+    public void updateUser(User user) {
+        userList = new ArrayList<User>();
+        userList.add(user);
+    }
+
+    public Likes(Post post) {
         this.post = post;
-//        userList = new ArrayList<User>();
-//        userList.add(user);
-        this.userList.add(user);
     }
 }
