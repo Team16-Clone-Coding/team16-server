@@ -6,6 +6,7 @@ import team16.instagramclone.domain.Likes;
 import team16.instagramclone.domain.Post;
 import team16.instagramclone.domain.User;
 import team16.instagramclone.repository.LikeRepository;
+import team16.instagramclone.repository.PostRepository;
 import team16.instagramclone.repository.UserRepository;
 import team16.instagramclone.security.UserDetailsImpl;
 
@@ -17,11 +18,18 @@ import java.util.Optional;
 public class LikeService {
 
     private final LikeRepository likeRepository;
-    public final UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
     //좋아요 생성
-    public void createLike(Post post) {
-        Likes likes = new Likes(post);
+    public Likes
+    createLike() {
+        Likes likes = new Likes();
+        likeRepository.save(likes);
+        return likes;
+    }
+
+    public void saveLikes(Likes likes) {
         likeRepository.save(likes);
     }
 
@@ -30,14 +38,14 @@ public class LikeService {
     public void doLike(Long postId) {
 //        User user = userDetails.getUser();
         User user = userRepository.findById(1L).get();
-        if (likeRepository.findByPost_PostIdAndUserList(postId, user).isPresent()) {
-            Likes likes = likeRepository.findByPost_PostId(postId).get();
+        Likes likes = postRepository.findById(postId).get().getLikes();
+        if (likes.getUserList().contains(user)) {
             likes.updateHowManyLike(-1);
             likes.getUserList().remove(user);
         } else {
-            Likes likes = likeRepository.findByPost_PostId(postId).get();
             likes.updateHowManyLike(+1);
-            likes.updateUser(user);
+            likes.getUserList().add(user);
+            System.out.println("likes.getUserList() = " + likes.getUserList().size());
         }
     }
 }
