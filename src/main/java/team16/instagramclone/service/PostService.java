@@ -1,6 +1,7 @@
 package team16.instagramclone.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import team16.instagramclone.domain.Likes;
 import team16.instagramclone.domain.Post;
@@ -29,13 +30,16 @@ public class PostService {
 
     //게시글 작성
     @Transactional
-    public void createPost(PostRequestDto postRequestDto){
-//        User user = userDetails.getUser();
-        User user = userRepository.findById(1L).get();
+    public void createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails){
+        User user = userDetails.getUser();
         Likes like = likeService.createLike();
         Post post = new Post(postRequestDto, user, like);
         postRepository.save(post);
+    }
 
+    public List<Post> getMyPost(User user) {
+        List<Post> postList = postRepository.findAllByUser(user);
+        return postList;
     }
 
 }

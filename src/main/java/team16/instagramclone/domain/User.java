@@ -20,9 +20,20 @@ public class User {
     @Column(nullable = false)
     private String userPassword;
 
-    public User(Long userId, String userName, String userPassword) {
-        this.userId = userId;
+    @Column(nullable = false)
+    private String userImage;
+
+    @Column(nullable = false)
+    private String userEmail;
+
+    public User(String userName, String userPassword, String userImage, String userEmail) {
         this.userName = userName;
         this.userPassword = userPassword;
+        this.userImage = userImage;
+        this.userEmail = userEmail;
+    }
+
+    public void updateUserImage(String userImage) {
+        this.userImage = userImage;
     }
 }

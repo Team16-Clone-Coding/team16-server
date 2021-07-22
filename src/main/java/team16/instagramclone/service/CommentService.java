@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import team16.instagramclone.domain.Comment;
 import team16.instagramclone.domain.Post;
 import team16.instagramclone.domain.User;
+import team16.instagramclone.dto.CommentRequestDto;
 import team16.instagramclone.repository.CommentRepository;
 import team16.instagramclone.repository.PostRepository;
 import team16.instagramclone.repository.UserRepository;
@@ -23,10 +24,9 @@ public class CommentService {
 
     //댓글 저장
     @Transactional
-    public void saveComment(String commentContent, Long postId) {
-//        String userName = userDetails.getUser().getUserName();
-        String userName = userRepository.findById(1L).get().getUserName();
-        Comment comment = new Comment(commentContent, postId, userName);
+    public void saveComment(CommentRequestDto commentRequestDto, Long postId, UserDetailsImpl userDetails) {
+        String userName = userDetails.getUser().getUserName();
+        Comment comment = new Comment(commentRequestDto.getCommentContent(), postId, userName);
         Post post = postRepository.findById(postId).get();
         post.addComment(comment);
         commentRepository.save(comment);

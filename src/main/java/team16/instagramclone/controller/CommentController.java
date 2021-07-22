@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import team16.instagramclone.dto.CommentRequestDto;
 import team16.instagramclone.repository.CommentRepository;
 import team16.instagramclone.security.UserDetailsImpl;
 import team16.instagramclone.service.CommentService;
@@ -18,8 +19,7 @@ public class CommentController {
 
     //댓글 작성
     @PostMapping("posts/{id}/comment")
-    public void createComment(@PathVariable(name = "id") Long postId,@RequestBody String commentContent, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-//        commentService.saveComment(commentContent, postId, userDetails);
-        commentService.saveComment(commentContent, postId);
+    public void createComment(@PathVariable(name = "id") Long postId, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        commentService.saveComment(commentRequestDto, postId, userDetails);
     }
 }
