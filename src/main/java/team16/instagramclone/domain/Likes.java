@@ -21,10 +21,18 @@ public class Likes {
     @Column(nullable = true)
     private int howManyLike;
 
-    @OneToMany
+    @ManyToMany
     private List<User> userList = new ArrayList<User>();
 
     public void updateHowManyLike(int plusOrMinus) {
         howManyLike += plusOrMinus;
+    }
+
+    public void deleteUser(User user) {
+        this.userList.remove(user);
+    }
+
+    public void addUser(User user) {
+        this.userList.add(user);
     }
 }

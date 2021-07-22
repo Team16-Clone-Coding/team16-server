@@ -33,7 +33,6 @@ public class Post extends TimeStamped {
     private Likes likes;
 
     @ManyToOne
-    @JoinColumn(name = "USER ID")
     private User user;
 
     @OneToMany

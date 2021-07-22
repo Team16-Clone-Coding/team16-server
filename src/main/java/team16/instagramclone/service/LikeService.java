@@ -11,6 +11,7 @@ import team16.instagramclone.repository.UserRepository;
 import team16.instagramclone.security.UserDetailsImpl;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,17 +36,20 @@ public class LikeService {
 
     //좋아요 증감
     @Transactional
-    public void doLike(Long postId) {
-//        User user = userDetails.getUser();
-        User user = userRepository.findById(1L).get();
+    public void doLike(Long postId, UserDetailsImpl userDetails) {
+        Long userId = userDetails.getUser().getUserId();
+        User user = userRepository.getById(userId);
         Likes likes = postRepository.findById(postId).get().getLikes();
-        if (likes.getUserList().contains(user)) {
+        List<User> userList = likes.getUserList();
+
+        if (userList.contains(user)){
             likes.updateHowManyLike(-1);
-            likes.getUserList().remove(user);
+            userList.remove(user);
         } else {
             likes.updateHowManyLike(+1);
-            likes.getUserList().add(user);
-            System.out.println("likes.getUserList() = " + likes.getUserList().size());
+            userList.add(user);
         }
+
     }
+
 }
